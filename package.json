@@ -1,0 +1,136 @@
+{
+  "name": "kafkanaut",
+  "displayName": "kafkanaut",
+  "description": "Tool used to interact with message brokers",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.64.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:clusters",
+    "onCommand:kafkanaut.addCluster"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "clusters",
+        "contents": "[Add Cluster](command:kafkanaut.addCluster)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "kafkanaut.addCluster",
+        "title": "Add Cluster",
+        "icon": {
+          "light": "resources/light/plus.svg",
+          "dark": "resources/dark/plus.svg"
+        }
+      },
+      {
+        "command": "kafkanaut.deleteCluster",
+        "title": "Delete Cluster",
+        "icon": {
+          "light": "resources/light/trash.svg",
+          "dark": "resources/dark/trash.svg"
+        }
+      },
+      {
+        "command": "kafkanaut.editCluster",
+        "title": "Edit Cluster",
+        "icon": {
+          "light": "resources/light/edit.svg",
+          "dark": "resources/dark/edit.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "kafkanaut.addCluster",
+          "when": "view == clusters",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "kafkanaut.deleteCluster",
+          "when": "view == clusters && viewItem == cluster",
+          "group": "inline"
+        },
+        {
+          "command": "kafkanaut.editCluster",
+          "when": "view == clusters && viewItem == cluster",
+          "group": "inline"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kafkanaut",
+          "title": "kafkanaut",
+          "icon": "media/boat.svg"
+        }
+      ]
+    },
+    "views": {
+      "kafkanaut": [
+        {
+          "id": "clusters",
+          "name": "Clusters"
+        },
+        {
+          "id": "topics",
+          "name": "Topics"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@types/uuid": "^8.3.4",
+    "@types/vscode": "^1.64.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "@vscode/test-electron": "^2.0.3",
+    "css-loader": "^6.6.0",
+    "eslint": "^8.6.0",
+    "glob": "^7.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
+    "mocha": "^9.1.3",
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
+    "@vscode/webview-ui-toolkit": "^0.9.1",
+    "kafkajs": "^1.16.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "redux": "^4.1.2",
+    "uuid": "^8.3.2"
+  }
+}
