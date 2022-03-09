@@ -1,15 +1,17 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { eventNames } from "process";
 import * as vscode from "vscode";
 import { registerCommands } from "./commands";
 import { fetchTopics, selectById } from "./redux/reducers/cluster-reducer";
 import store from "./redux/store";
 import { ClusterTreeProvider } from "./views/clusters-treeview";
+import { createWebview } from "./views/webview";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const webview = createWebview(context)('message-inspector', 'Messages');
+
   const clusterTreeProvider = new ClusterTreeProvider();
   
   store.subscribe(() => {
