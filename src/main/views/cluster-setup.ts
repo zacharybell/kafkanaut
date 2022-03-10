@@ -14,7 +14,7 @@ export async function clusterSetup() {
   if (clusterName) {
     const brokerAddress = await vscode.window.showInputBox({
       title: 'Broker Address',
-      placeHolder: 'http://localhost:9092',
+      placeHolder: 'localhost:9092',
       prompt: 'Enter the broker address for your Kafka cluster...'
     });
 
